@@ -1,5 +1,5 @@
 Flask==2.3.2
 selenium==4.15.0
 opencv-python-headless==4.8.1.78
-Pillow==9.5.0
-
+Pillow==10.0.1
+gunicorn==21.2.0
