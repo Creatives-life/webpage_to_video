@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: webpage-to-video
+    env: python
+    plan: free
+    region: oregon
+    branch: main
+    buildCommand: pip install --upgrade pip setuptools wheel && pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
