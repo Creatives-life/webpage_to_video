@@ -1,55 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Webpage to Video Converter</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 20px; }
-label { display: block; margin-top: 10px; }
-input, select { width: 100%; padding: 5px; margin-top: 5px; }
-button { margin-top: 15px; padding: 10px 15px; }
-</style>
+    <meta charset="UTF-8">
+    <title>Webpage to Video Converter</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        input, select { width: 300px; margin-bottom: 10px; }
+        button { padding: 10px 20px; }
+        .flash { padding: 10px; margin-bottom: 10px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .danger { background-color: #f8d7da; color: #721c24; }
+    </style>
 </head>
 <body>
-<h2>Webpage to Video Converter</h2>
-<form action="/generate" method="post">
-    <label>HTML Page URL:</label>
-    <input type="text" name="html_url" value="https://ipfs.io/ipfs/" required>
+    <h1>Webpage to Video Converter</h1>
 
-    <label>Output Filename:</label>
-    <input type="text" name="output_filename" required>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
 
-    <label>Frame Rate (FPS):</label>
-    <input type="number" name="fps" value="15" required>
+    <form method="POST">
+        <label>HTML Page URL:</label><br>
+        <input type="text" name="html_url" value="https://ipfs.io/ipfs/" required><br>
 
-    <label>Duration (Seconds):</label>
-    <input type="number" name="duration" value="10" required>
+        <label>Output Filename:</label><br>
+        <input type="text" name="output_filename" required><br>
 
-    <label>Window Size (WxH):</label>
-    <input type="text" name="window_size" value="1280,720" required>
+        <label>Frame Rate (FPS):</label><br>
+        <input type="number" name="frame_rate" value="15" required><br>
 
-    <label>Video Speed (1.0 = Normal, &gt;1 = Slow):</label>
-    <input type="number" step="0.1" name="video_speed" value="2.0" required>
+        <label>Duration (Seconds):</label><br>
+        <input type="number" name="duration" value="10" required><br>
 
-    <label>Video Format:</label>
-    <select name="video_format">
-        <option value="MP4">MP4</option>
-        <option value="AVI">AVI</option>
-        <option value="MKV">MKV</option>
-        <option value="WEBP">WEBP</option>
-    </select>
+        <label>Window Size (WxH):</label><br>
+        <input type="text" name="window_size" value="1280,720" required><br>
 
-    <label>Browser:</label>
-    <select name="browser_choice">
-        <option value="Chrome">Chrome</option>
-        <option value="Firefox">Firefox</option>
-    </select>
+        <label>Video Speed (1.0=Normal, >1=Slow):</label><br>
+        <input type="number" step="0.1" name="video_speed" value="2.0" required><br>
 
-    <label>
-        <input type="checkbox" name="enable_slowdown" checked> Enable Slow Motion
-    </label>
+        <label>Video Format:</label><br>
+        <select name="video_format">
+            <option>MP4</option>
+            <option>AVI</option>
+            <option>MKV</option>
+            <option>WEBP</option>
+        </select><br>
 
-    <button type="submit">Generate Video</button>
-</form>
+        <label>Browser:</label><br>
+        <select name="browser_choice">
+            <option>Chrome</option>
+            <option>Firefox</option>
+        </select><br>
+
+        <label>
+            <input type="checkbox" name="enable_slowdown" checked>
+            Enable Slow Motion
+        </label><br><br>
+
+        <button type="submit">Generate Video</button>
+    </form>
 </body>
 </html>
